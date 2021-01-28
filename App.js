@@ -15,7 +15,7 @@ import {
   ImageBackground,
 } from 'react-native';
 
-import background from './android/app/src/main/assets/Background.jpg'
+import background from './android/app/src/main/assets/images/Background.jpg'
 const image = Image.resolveAssetSource(background).uri;
 
 const App = () => (
