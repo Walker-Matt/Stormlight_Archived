@@ -6,7 +6,11 @@
  * @flow strict-local
  */
 
+import 'react-native-gesture-handler';
+
 import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   StyleSheet,
   View,
@@ -16,23 +20,44 @@ import {
   Button,
 } from 'react-native';
 
-const App = () => {
-  const [count, setCount] = useState(0);
+const Stack = createStackNavigator();
 
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'Welcome' }}
+        />
+        <Stack.Screen name="Characters" component={CharacterScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/images/background.jpg')}
         style={styles.image}>
         <Text style={styles.text}>Stormlight Archived</Text>
         <Button
-          onPress={() => setCount(count + 1)}
-          title="Click me!"
+          title="Characters"
+          onPress={() =>
+            navigation.navigate('Characters', { testword: 'Test' })
+          }
         />
-        <Text> {count} </Text>
       </ImageBackground>
     </View>
   );
 };
+
+const CharacterScreen = ({ navigation, route }) => {
+  return <Text> {route.params.testword} </Text>;
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
