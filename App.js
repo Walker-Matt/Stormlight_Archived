@@ -8,7 +8,7 @@
 
 import 'react-native-gesture-handler';
 
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
@@ -19,6 +19,7 @@ import {
   ImageBackground,
   Button,
   Modal,
+  AsyncStorage,
 } from 'react-native';
 
 const Stack = createStackNavigator();
@@ -27,19 +28,41 @@ const Separator = () => (
   <View style={styles.separator} />
 );
 
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Welcome' }}
-        />
-        <Stack.Screen name="Characters" component={CharacterScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+class App extends Component<Props> {
+  state: {
+    'progress': ''
+  }
+  storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('progress', value)
+    } catch (e) {
+      // saving error
+    }
+  }
+  getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('progress')
+      if(value !== null) {
+        // value previously stored
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: this.progress }}
+          />
+          <Stack.Screen name="Characters" component={CharacterScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 };
 
 const HomeScreen = ({ navigation }) => {
@@ -85,7 +108,7 @@ const HomeScreen = ({ navigation }) => {
         <Button
           title="Characters"
           onPress={() =>
-            navigation.navigate('Characters', { testword: 'Test' })
+            navigation.navigate('Characters')
           }
         />
       </ImageBackground>
@@ -93,7 +116,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-const CharacterScreen = ({ navigation, route }) => {
+const CharacterScreen = ({ navigation }) => {
   return <Text> TO-DO </Text>;
 };
 
