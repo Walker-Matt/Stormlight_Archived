@@ -1,30 +1,34 @@
+/**
+ * Getter/Setter for locally stored reading progress
+ */
+
 import React from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Global {}
-
-const STORAGE_KEY = '@storage_key'
-
 module.exports = {
-  progress: '',
   functions: Global
 }
 
-Global.setProgress = async (value) => {
+Global.SetProgress = async (value) => {
   try {
-    await AsyncStorage.setItem(STORAGE_KEY, value)
-    GLOBAL.PROGRESS = value;
+    await AsyncStorage.setItem('@storage_key', value)
   } catch (e) {
     alert(e)
   }
 };
 
-Global.getProgress = async () => {
-  try {
-    const value = await AsyncStorage.getItem(STORAGE_KEY);
-    GLOBAL.PROGRESS = value;
-  } catch(e) {
-    alert(e)
+Global.Progress = function() {
+  const [progress, setProgress] = React.useState(null);
+  const fetch = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@storage_key');
+      setProgress(value)
+    } catch(e) {
+      alert(e)
+    }
   }
+  fetch();
+  return progress;
 }

@@ -21,7 +21,7 @@ import {
   Modal,
 } from 'react-native';
 
-import GLOBAL from './global.js';
+import GLOBAL from './Global.js'
 
 const Stack = createStackNavigator();
 
@@ -30,14 +30,14 @@ const Separator = () => (
 );
 
 const App = () => {
- GLOBAL.functions.getProgress();
+  const progress = GLOBAL.functions.Progress();
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: 'Welcome' }}
+          options={{ title: progress }}
         />
         <Stack.Screen name="Characters" component={CharacterScreen} />
       </Stack.Navigator>
@@ -69,7 +69,7 @@ const HomeScreen = ({ navigation }) => {
             <Button
               title="I've read nothing"
               onPress={() => {
-                GLOBAL.functions.setProgress('1,1,1');
+                GLOBAL.functions.SetProgress('0,0,0')
                 setModalVisible(!modalVisible);
               }}
             />
@@ -77,6 +77,7 @@ const HomeScreen = ({ navigation }) => {
             <Button
               title="I've read it all"
               onPress={() => {
+                GLOBAL.functions.SetProgress('4,5,117')
                 setModalVisible(!modalVisible);
               }}
             />
@@ -90,12 +91,6 @@ const HomeScreen = ({ navigation }) => {
           title="Characters"
           onPress={() =>
             navigation.navigate('Characters')
-          }
-        />
-        <Button
-          title="Test"
-          onPress={() =>
-            alert(GLOBAL.PROGRESS)
           }
         />
       </ImageBackground>
