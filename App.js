@@ -19,8 +19,9 @@ import {
   ImageBackground,
   Button,
   Modal,
-  AsyncStorage,
 } from 'react-native';
+
+import GLOBAL from './global.js';
 
 const Stack = createStackNavigator();
 
@@ -28,41 +29,20 @@ const Separator = () => (
   <View style={styles.separator} />
 );
 
-class App extends Component<Props> {
-  state: {
-    'progress': ''
-  }
-  storeData = async (value) => {
-    try {
-      await AsyncStorage.setItem('progress', value)
-    } catch (e) {
-      // saving error
-    }
-  }
-  getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('progress')
-      if(value !== null) {
-        // value previously stored
-      }
-    } catch(e) {
-      // error reading value
-    }
-  }
-  render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ title: this.progress }}
-          />
-          <Stack.Screen name="Characters" component={CharacterScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+const App = () => {
+ GLOBAL.functions.getProgress();
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'Welcome' }}
+        />
+        <Stack.Screen name="Characters" component={CharacterScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 };
 
 const HomeScreen = ({ navigation }) => {
@@ -89,6 +69,7 @@ const HomeScreen = ({ navigation }) => {
             <Button
               title="I've read nothing"
               onPress={() => {
+                GLOBAL.functions.setProgress('1,1,1');
                 setModalVisible(!modalVisible);
               }}
             />
@@ -109,6 +90,12 @@ const HomeScreen = ({ navigation }) => {
           title="Characters"
           onPress={() =>
             navigation.navigate('Characters')
+          }
+        />
+        <Button
+          title="Test"
+          onPress={() =>
+            alert(GLOBAL.PROGRESS)
           }
         />
       </ImageBackground>
