@@ -19,8 +19,8 @@ Global.SetProgress = async (value) => {
   }
 };
 
-Global.Progress = function() {
-  const [progress, setProgress] = React.useState(null);
+Global.GetProgress = function() {
+  const [progress, setProgress] = React.useState('');
   const fetch = async () => {
     try {
       const value = await AsyncStorage.getItem('@storage_key');

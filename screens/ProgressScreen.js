@@ -2,12 +2,13 @@
  * Progress screen
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
   Text,
   Button,
+  TextInput,
 } from 'react-native';
 
 import {Picker} from '@react-native-picker/picker';
@@ -18,11 +19,15 @@ const Separator = () => (
   <View style={styles.separator} />
 );
 
-function PopulatePicker(amount) {
-}
+//The Way of Kings: 75 chapters
+//Words of Radiance: 89 chapters
+//Oathbringer: 122 chapters
+//Rhythm of War: 117 chapters
 
 export default function ProgressScreen({ navigation }) {
-  const [selectedValue, setSelectedValue] = useState("1");
+  const [bookValue, setBookValue] = React.useState("1");
+  const [partValue, setPartValue] = React.useState("1");
+  const [chapterValue, setChapterValue] = React.useState("0");
   return (
     <View style={styles.column}>
       <Text style={styles.text}>
@@ -35,10 +40,10 @@ export default function ProgressScreen({ navigation }) {
         </Text>
         <Picker
           style={styles.centeredView}
-          selectedValue={selectedValue}
+          selectedValue={bookValue}
           style={{height: 20, width: 200}}
           onValueChange={(itemValue, itemIndex) => {
-            setSelectedValue(itemValue)
+            setBookValue(itemValue)
           }}>
           <Picker.Item label="The Way of Kings" value="1" />
           <Picker.Item label="Words of Radiance" value="2" />
@@ -46,16 +51,50 @@ export default function ProgressScreen({ navigation }) {
           <Picker.Item label="Rhythm of War" value="4" />
         </Picker>
       </View>
-      <Text>
-        Test
-      </Text>
+      <Separator />
+      <View style={styles.row}>
+        <Text>
+          Part:
+        </Text>
+        <Picker
+          style={styles.centeredView}
+          selectedValue={partValue}
+          style={{height: 20, width: 200}}
+          onValueChange={(itemValue, itemIndex) => {
+            setPartValue(itemValue)
+          }}>
+          <Picker.Item label="One" value="1" />
+          <Picker.Item label="Two" value="2" />
+          <Picker.Item label="Three" value="3" />
+          <Picker.Item label="Four" value="4" />
+          <Picker.Item label="Five" value="5" />
+        </Picker>
+      </View>
+      <Separator />
+      <View style={styles.row}>
+        <Text>
+          Chapter:
+        </Text>
+        <TextInput
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        onChangeText={text => setChapterValue(text)}
+        value={chapterValue}
+        keyboardType='number-pad'
+        />
+      </View>
       <Separator />
       <Button
-        title="Test"
+        title="Set"
         onPress={() => {
-          alert(selectedValue)
+          GLOBAL.functions.SetProgress(
+            bookValue + ',' +
+            partValue + ',' +
+            chapterValue);
         }}
       />
+      <Text>
+        {GLOBAL.functions.GetProgress()}
+      </Text>
     </View>
   )
 }
@@ -78,7 +117,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 42,
+    fontSize: 35,
     fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "#000000a0"

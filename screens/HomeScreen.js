@@ -2,7 +2,7 @@
  * Home screen
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -20,7 +20,7 @@ const Separator = () => (
 );
 
 export default function HomeScreen({ navigation }) {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = React.useState(true);
   return (
     <View style={styles.container}>
       <Modal
@@ -62,6 +62,12 @@ export default function HomeScreen({ navigation }) {
         style={styles.image}>
         <Text style={styles.text}>Stormlight Archived</Text>
         <Button
+          title="Update Reading Progression"
+          onPress={() =>
+            navigation.navigate('Progress')
+          }
+        />
+        <Button
           title="Characters"
           onPress={() =>
             navigation.navigate('Characters')
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    alignItems: "center"
+    //alignItems: "center"
   },
   image: {
     flex: 1,
