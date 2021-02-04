@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
+    alignItems: "center"
   },
   image: {
     flex: 1,
