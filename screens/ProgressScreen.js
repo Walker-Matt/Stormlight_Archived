@@ -25,9 +25,9 @@ const Separator = () => (
 //Rhythm of War: 117 chapters
 
 export default function ProgressScreen({ navigation }) {
-  const [bookValue, setBookValue] = React.useState("1");
-  const [partValue, setPartValue] = React.useState("1");
-  const [chapterValue, setChapterValue] = React.useState("0");
+  const [bookValue, setBookValue] = React.useState("null");
+  const [partValue, setPartValue] = React.useState("null");
+  const [chapterValue, setChapterValue] = React.useState("null");
   return (
     <View style={styles.column}>
       <Text style={styles.text}>

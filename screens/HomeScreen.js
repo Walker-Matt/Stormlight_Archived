@@ -1,5 +1,7 @@
 /**
  * Home screen
+ * Initial screen on start-up
+ * Lists each feature screen
  */
 
 import React from 'react';
@@ -20,9 +22,35 @@ const Separator = () => (
 );
 
 export default function HomeScreen({ navigation }) {
-  const [modalVisible, setModalVisible] = React.useState(true);
   return (
     <View style={styles.container}>
+      <ShowModal navigation={navigation}/>
+      <ImageBackground source={require('./../assets/images/background.jpg')}
+        style={styles.image}>
+        <Text style={styles.text}>Stormlight Archived</Text>
+        <Button
+          title="Update Reading Progression"
+          onPress={() =>
+            navigation.navigate('Progress')
+          }
+        />
+        <Button
+          title="Characters"
+          onPress={() =>
+            navigation.navigate('Characters')
+          }
+        />
+      </ImageBackground>
+    </View>
+  );
+};
+
+function ShowModal(props) {
+  const navigation = props.navigation;
+  const progress = GLOBAL.functions.GetProgress();
+  const [modalVisible, setModalVisible] = React.useState(true);
+  if(progress == 'null,null,null') {
+    return (
       <Modal
         animationType="slide"
         transparent={true}
@@ -58,25 +86,11 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
       </Modal>
-      <ImageBackground source={require('./../assets/images/background.jpg')}
-        style={styles.image}>
-        <Text style={styles.text}>Stormlight Archived</Text>
-        <Button
-          title="Update Reading Progression"
-          onPress={() =>
-            navigation.navigate('Progress')
-          }
-        />
-        <Button
-          title="Characters"
-          onPress={() =>
-            navigation.navigate('Characters')
-          }
-        />
-      </ImageBackground>
-    </View>
-  );
-};
+    )
+  } else {
+    return null;
+  }
+}
 
 const styles = StyleSheet.create({
   centeredView: {
