@@ -49,7 +49,7 @@ function ShowModal(props) {
   const navigation = props.navigation;
   const progress = GLOBAL.functions.GetProgress();
   const [modalVisible, setModalVisible] = React.useState(true);
-  if(progress == 'null,null,null') {
+  if(progress == null) {
     return (
       <Modal
         animationType="slide"
