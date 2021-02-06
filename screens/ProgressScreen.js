@@ -1,5 +1,6 @@
 /**
  * Progress screen
+ * User input to establish their place in the books
  */
 
 import React from 'react';

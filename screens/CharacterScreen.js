@@ -10,8 +10,9 @@ import {
 
 import GLOBAL from './../Global.js'
 
-export default function CharacterScreen({ navigation }) {
+export default function CharacterScreen({ navigation, route }) {
+  const { character } = route.params;
   return (
-    <Text> TO-DO </Text>
+    <Text> {character.data.lastname.value} </Text>
   )
 }

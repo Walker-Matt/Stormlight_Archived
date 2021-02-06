@@ -14,8 +14,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 //importing each custom screen
 import HomeScreen from './screens/HomeScreen'
-import CharactersScreen from './screens/CharactersScreen'
 import ProgressScreen from './screens/ProgressScreen'
+import CharactersScreen from './screens/CharactersScreen'
 import CharacterScreen from './screens/CharacterScreen'
 
 const Stack = createStackNavigator();
@@ -27,9 +27,10 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen}/>
-        <Stack.Screen name="Characters" component={CharactersScreen}/>
         <Stack.Screen name="Progress" component={ProgressScreen}/>
-        <Stack.Screen name="Character" component={CharacterScreen}/>
+        <Stack.Screen name="Characters" component={CharactersScreen}/>
+        <Stack.Screen name="Character" component={CharacterScreen}
+        options={({ route }) => ({ title: route.params.name })}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
