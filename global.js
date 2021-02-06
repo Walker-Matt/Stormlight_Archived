@@ -32,3 +32,15 @@ Global.GetProgress = function() {
   fetch();
   return progress;
 }
+
+Global.CanDisplay = function(progress, appearence) {
+  const appearenceArr = appearence.split(',');
+  const progressArr = progress.split(',');
+  var canDisplay = true;
+  for(var i=0; i<3; i++) {
+    if(appearenceArr[i] > progressArr[i]) {
+      canDisplay = false;
+    }
+  }
+  return canDisplay;
+}

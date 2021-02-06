@@ -17,26 +17,33 @@ import Kaladin from  './../assets/data/character/Kaladin'
 import Shallan from  './../assets/data/character/Shallan'
 
 export default function CharactersScreen({ navigation }) {
+  const progress = GLOBAL.functions.GetProgress();
   return (
     <View>
-      <Button
-        title="Kaladin"
-        onPress={() => {
-          navigation.navigate('Character', {
-            name: 'Kaladin',
-            character: Kaladin
-          })
-        }}
-      />
-      <Button
-        title="Shallan"
-        onPress={() => {
-          navigation.navigate('Character', {
-            name: "Shallan",
-            character: Shallan
-          })
-        }}
-      />
+      {GLOBAL.functions.CanDisplay(progress, Kaladin.appearence)
+        ? <Button
+          title="Kaladin"
+          onPress={() => {
+            navigation.navigate('Character', {
+              name: 'Kaladin',
+              character: Kaladin
+            })
+          }}
+          />
+        : null
+      }
+      {GLOBAL.functions.CanDisplay(progress, Shallan.appearence)
+        ? <Button
+          title="Shallan"
+          onPress={() => {
+            navigation.navigate('Character', {
+              name: "Shallan",
+              character: Shallan
+            })
+          }}
+          />
+        : null
+      }
     </View>
   )
 }
