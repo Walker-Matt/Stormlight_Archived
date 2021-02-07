@@ -19,7 +19,7 @@ import {
 
 import GLOBAL from './../Global'
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
   return (
     <View style={styles.parentView}>
       <ShowModal navigation={navigation}/>

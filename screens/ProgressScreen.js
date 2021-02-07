@@ -10,15 +10,13 @@ import {
   Text,
   Button,
   TextInput,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import {Picker} from '@react-native-picker/picker';
 
 import GLOBAL from './../Global'
-
-const Separator = () => (
-  <View style={styles.separator} />
-);
 
 //The Way of Kings: 75 chapters
 //Words of Radiance: 89 chapters
@@ -32,78 +30,163 @@ export default function ProgressScreen({ navigation }) {
 
   return (
     <View style={styles.column}>
-      <Text style={styles.text}>
-        Where are you in 'The Stormlight Archives'?
-      </Text>
-      <Separator />
+      <Separator/>
       <View style={styles.row}>
-        <Text>
+        <Text style={styles.text}>
           Book:
         </Text>
-        <Picker
-          style={styles.centeredView}
-          selectedValue={bookValue}
-          style={{height: 20, width: 200}}
-          onValueChange={(itemValue, itemIndex) => {
-            setBookValue(itemValue)
-          }}>
-          <Picker.Item label="Select" value="" />
-          <Picker.Item label="The Way of Kings" value="1" />
-          <Picker.Item label="Words of Radiance" value="2" />
-          <Picker.Item label="Oathbringer" value="3" />
-          <Picker.Item label="Rhythm of War" value="4" />
-        </Picker>
       </View>
-      <Separator />
+      <Separator/>
+      <BookSelect
+      bookValue={bookValue}
+      setBookValue={setBookValue}/>
+      <Separator/>
       <View style={styles.row}>
-        <Text>
+        <Text style={styles.text}>
           Part:
         </Text>
-        <Picker
-          style={styles.centeredView}
-          selectedValue={partValue}
-          style={{height: 20, width: 200}}
-          onValueChange={(itemValue, itemIndex) => {
-            setPartValue(itemValue)
-          }}>
-          <Picker.Item label="Select" value="" />
-          <Picker.Item label="One" value="1" />
-          <Picker.Item label="Two" value="2" />
-          <Picker.Item label="Three" value="3" />
-          <Picker.Item label="Four" value="4" />
-          <Picker.Item label="Five" value="5" />
-        </Picker>
       </View>
-      <Separator />
+      <Separator/>
+      <PartSelect
+      partValue={partValue}
+      setPartValue={setPartValue}/>
+      <Separator/>
       <View style={styles.row}>
-        <Text>
+        <Text style={styles.text}>
           Chapter:
         </Text>
+      </View>
+      <View style={styles.row}>
         <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        style={styles.input}
         onChangeText={text => setChapterValue(text)}
         value={chapterValue}
         keyboardType='number-pad'
         />
       </View>
-      <Separator />
-      <Button
-        title="Save"
-        onPress={() => {
-          GLOBAL.functions.SetProgress(
-            bookValue + ',' +
-            partValue + ',' +
-            chapterValue);
-          navigation.navigate("Home");
-        }}
-      />
+      <Separator/>
+      <View style={styles.row}>
+        <TouchableOpacity
+          style={styles.save}
+          onPress={() =>
+            trySetProgress(navigation, bookValue, partValue, chapterValue)}
+        >
+          <Text style={styles.saveText}> Save </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
 
-function check() {
-
+function BookSelect(props) {
+  return (
+    <View style={styles.bookRow}>
+      <Separator/>
+      <TouchableOpacity
+        style={(props.bookValue == 1) ?
+          [styles.bookSelected] : [styles.book]}
+        onPress={() => props.setBookValue(1)}>
+        <Image
+          style={styles.icon}
+          source={require('./../assets/icons/The_Way_Of_Kings.jpg')}
+        />
+      </TouchableOpacity>
+      <Separator/>
+      <TouchableOpacity
+        style={(props.bookValue == 2) ?
+          [styles.bookSelected] : [styles.book]}
+        onPress={() => props.setBookValue(2)}>
+        <Image
+          style={styles.icon}
+          source={require('./../assets/icons/Words_Of_Radiance.jpg')}
+        />
+      </TouchableOpacity>
+      <Separator/>
+      <TouchableOpacity
+        style={(props.bookValue == 3) ?
+          [styles.bookSelected] : [styles.book]}
+        onPress={() => props.setBookValue(3)}>
+        <Image
+          style={styles.icon}
+          source={require('./../assets/icons/Oathbringer.jpg')}
+        />
+      </TouchableOpacity>
+      <Separator/>
+      <TouchableOpacity
+        style={(props.bookValue == 4) ?
+          [styles.bookSelected] : [styles.book]}
+        onPress={() => props.setBookValue(4)}>
+        <Image
+          style={styles.icon}
+          source={require('./../assets/icons/Rhythm_Of_War.jpg')}
+        />
+      </TouchableOpacity>
+      <Separator/>
+    </View>
+  )
 }
+
+function PartSelect(props) {
+  return (
+    <View style={styles.row}>
+      <Separator/>
+      <TouchableOpacity
+        style={(props.partValue == 1) ?
+          [styles.partSelected] : [styles.part]}
+        onPress={() => props.setPartValue(1)}>
+        <Text style={styles.partText}> 1 </Text>
+      </TouchableOpacity>
+      <Separator/>
+      <TouchableOpacity
+        style={(props.partValue == 2) ?
+          [styles.partSelected] : [styles.part]}
+        onPress={() => props.setPartValue(2)}>
+      <Text style={styles.partText}> 2 </Text>
+      </TouchableOpacity>
+      <Separator/>
+      <TouchableOpacity
+        style={(props.partValue == 3) ?
+          [styles.partSelected] : [styles.part]}
+        onPress={() => props.setPartValue(3)}>
+        <Text style={styles.partText}> 3 </Text>
+      </TouchableOpacity>
+      <Separator/>
+      <TouchableOpacity
+        style={(props.partValue == 4) ?
+          [styles.partSelected] : [styles.part]}
+        onPress={() => props.setPartValue(4)}>
+        <Text style={styles.partText}> 4 </Text>
+      </TouchableOpacity>
+      <Separator/>
+      <TouchableOpacity
+        style={(props.partValue == 5) ?
+          [styles.partSelected] : [styles.part]}
+        onPress={() => props.setPartValue(5)}>
+        <Text style={styles.partText}> 5 </Text>
+      </TouchableOpacity>
+      <Separator/>
+    </View>
+  )
+}
+
+function trySetProgress(navigation, bookValue, partValue, chapterValue) {
+  if(!bookValue || !partValue || !chapterValue) {
+    alert("Please select the book, part, and chapter you have read to.")
+  } else {
+    GLOBAL.functions.SetProgress(
+      bookValue + ',' +
+      partValue + ',' +
+      chapterValue);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home'}],
+      })
+  }
+}
+
+const Separator = () => (
+  <View style={styles.separator} />
+);
 
 const styles = StyleSheet.create({
   column: {
@@ -112,25 +195,83 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   row: {
-    flex: 1,
+    flex: 2,
     flexDirection: "row",
   },
-  picker: {
-    flex: 1,
+  bookRow: {
+    flex: 4,
+    flexDirection: "row",
+  },
+  book: {
+    height: 140,
+    width: 95,
+    borderWidth: 5,
+    borderColor: "white",
+    borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    padding: 30,
+  },
+  bookSelected: {
+    height: 140,
+    width: 95,
+    borderWidth: 5,
+    borderColor: "red",
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 30,
+  },
+  icon: {
+    height: 133,
+    width: 88,
+  },
+  part: {
+    flex: 3,
+    borderWidth: 5,
+    borderColor: "white",
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "lightblue"
+  },
+  partSelected: {
+    flex: 3,
+    borderWidth: 5,
+    borderColor: "red",
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "lightblue"
+  },
+  partText: {
+    color: "black",
+    fontSize: 50,
   },
   text: {
+    flex: 1,
+    color: "black",
+    fontSize: 30,
+    textAlign: "center"
+  },
+  save: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "green"
+  },
+  saveText: {
     color: "white",
-    fontSize: 35,
-    fontWeight: "bold",
+    fontSize: 30,
+    textAlign: "center"
+  },
+  input: {
+    width: 100,
+    borderColor: 'gray',
+    borderWidth: 1,
     textAlign: "center",
-    backgroundColor: "#000000a0"
+    fontSize: 20
   },
   separator: {
-    marginVertical: 8,
-    borderBottomColor: '#737373',
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    flex: 1
   },
 });

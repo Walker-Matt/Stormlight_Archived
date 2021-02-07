@@ -36,10 +36,12 @@ const App = () => {
           headerStyle: {
             backgroundColor: '#BD3705',
           },
-          headerTitleStyle: styles.homeTitle
-          }}
-        />
-        <Stack.Screen name="Progress" component={ProgressScreen}/>
+          headerTitleStyle: styles.homeTitle,
+          }}/>
+        <Stack.Screen name="Progress" component={ProgressScreen}
+        options={{
+          title: 'Where have you read to?',
+        }}/>
         <Stack.Screen name="Characters" component={CharactersScreen}/>
         <Stack.Screen name="Character" component={CharacterScreen}
         options={({ route }) => ({ title: route.params.name })}/>
