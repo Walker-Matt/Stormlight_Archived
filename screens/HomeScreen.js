@@ -12,38 +12,171 @@ import {
   Image,
   ImageBackground,
   Button,
+  TouchableOpacity,
   Modal,
+  StatusBar,
 } from 'react-native';
 
 import GLOBAL from './../Global'
+
+export default function HomeScreen({ navigation }) {
+  return (
+    <View style={styles.parentView}>
+      <ShowModal navigation={navigation}/>
+      <View style={styles.mainView}>
+        <ImageBackground
+          source={require('./../assets/images/background.jpg')}
+          style={styles.background}>
+          <Separator/>
+          <View style={styles.row}>
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+          </View>
+          <Separator/>
+          <View style={styles.row}>
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+          </View>
+          <Separator/>
+          <View style={styles.row}>
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+          </View>
+          <Separator/>
+          <View style={styles.row}>
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Characters'
+              iconName='placeholder'
+              text='Characters'
+            />
+            <Separator/>
+          </View>
+          <Separator/>
+        </ImageBackground>
+      </View>
+      <ProgressView navigation={navigation}/>
+    </View>
+  );
+};
 
 const Separator = () => (
   <View style={styles.separator} />
 );
 
-export default function HomeScreen({ navigation }) {
+const Icon = (props) => (
+  <View style={styles.buttonView}>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={() => props.navigation.navigate(props.screen)}
+    >
+      <Image
+        style={styles.icon}
+        source={require('./../assets/icons/Character_Icon.png')}
+      />
+    </TouchableOpacity>
+    <Text style={styles.iconText}>
+      {props.text}
+    </Text>
+  </View>
+);
+
+function ProgressView(props) {
+  const progressArr = GLOBAL.functions.GetProgress().split(',');
   return (
-    <View style={styles.container}>
-      <ShowModal navigation={navigation}/>
-      <ImageBackground source={require('./../assets/images/background.jpg')}
-        style={styles.image}>
-        <Text style={styles.text}>Stormlight Archived</Text>
-        <Button
-          title="Update Reading Progression"
-          onPress={() =>
-            navigation.navigate('Progress')
-          }
-        />
-        <Button
-          title="Characters"
-          onPress={() =>
-            navigation.navigate('Characters')
-          }
-        />
-      </ImageBackground>
+    <View style={styles.progressView}>
+      <Separator/>
+      <Text style={styles.progressText}>
+        Book: {progressArr[0] + '  '}
+        Part: {progressArr[1] + '  '}
+        Chapter: {progressArr[2]}
+      </Text>
+      <Separator/>
+      <TouchableOpacity
+        style={styles.progressButton}
+        onPress={() => props.navigation.navigate('Progress')}
+      >
+        <Text> Update </Text>
+      </TouchableOpacity>
+      <Separator/>
     </View>
-  );
-};
+  )
+}
 
 function ShowModal(props) {
   const navigation = props.navigation;
@@ -71,7 +204,7 @@ function ShowModal(props) {
             <Button
               title="I've read nothing"
               onPress={() => {
-                GLOBAL.functions.SetProgress('0,0,0')
+                GLOBAL.functions.SetProgress(',,')
                 setModalVisible(!modalVisible);
               }}
             />
@@ -93,12 +226,6 @@ function ShowModal(props) {
 }
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
-  },
   modalView: {
     margin: 20,
     backgroundColor: "white",
@@ -118,25 +245,63 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center"
   },
-  container: {
+  parentView: {
     flex: 1,
     flexDirection: "column",
-    //alignItems: "center"
   },
-  image: {
+  mainView: {
+    flex: 12,
+    flexDirection: "column",
+  },
+  progressView: {
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "steelblue",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  progressText: {
+    flex: 9,
+    color: "white",
+    fontSize: 20
+  },
+  progressButton: {
+    flex: 2,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  row: {
+    flex: 3,
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  separator: {
+    flex: 1,
+  },
+  buttonView: {
+    flex: 5,
+    flexDirection: "column",
+  },
+  button: {
+    flex: 3,
+    backgroundColor: 'rgba(52, 52, 52, 0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 30,
+    borderRadius: 25,
+  },
+  iconText: {
+    backgroundColor: "white",
+    textAlign: "center",
+    fontWeight: "bold"
+  },
+  background: {
     flex: 1,
     resizeMode: "cover",
   },
-  text: {
-    color: "white",
-    fontSize: 42,
-    fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000a0"
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: '#737373',
-    borderBottomWidth: StyleSheet.hairlineWidth,
+  icon: {
+    height: 100,
+    width: 100,
   },
 });

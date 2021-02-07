@@ -26,9 +26,10 @@ const Separator = () => (
 //Rhythm of War: 117 chapters
 
 export default function ProgressScreen({ navigation }) {
-  const [bookValue, setBookValue] = React.useState("1");
-  const [partValue, setPartValue] = React.useState("1");
-  const [chapterValue, setChapterValue] = React.useState("1");
+  const [bookValue, setBookValue] = React.useState('');
+  const [partValue, setPartValue] = React.useState('');
+  const [chapterValue, setChapterValue] = React.useState('');
+
   return (
     <View style={styles.column}>
       <Text style={styles.text}>
@@ -46,6 +47,7 @@ export default function ProgressScreen({ navigation }) {
           onValueChange={(itemValue, itemIndex) => {
             setBookValue(itemValue)
           }}>
+          <Picker.Item label="Select" value="" />
           <Picker.Item label="The Way of Kings" value="1" />
           <Picker.Item label="Words of Radiance" value="2" />
           <Picker.Item label="Oathbringer" value="3" />
@@ -64,6 +66,7 @@ export default function ProgressScreen({ navigation }) {
           onValueChange={(itemValue, itemIndex) => {
             setPartValue(itemValue)
           }}>
+          <Picker.Item label="Select" value="" />
           <Picker.Item label="One" value="1" />
           <Picker.Item label="Two" value="2" />
           <Picker.Item label="Three" value="3" />
@@ -85,19 +88,21 @@ export default function ProgressScreen({ navigation }) {
       </View>
       <Separator />
       <Button
-        title="Set"
+        title="Save"
         onPress={() => {
           GLOBAL.functions.SetProgress(
             bookValue + ',' +
             partValue + ',' +
             chapterValue);
+          navigation.navigate("Home");
         }}
       />
-      <Text>
-        {GLOBAL.functions.GetProgress()}
-      </Text>
     </View>
   )
+}
+
+function check() {
+
 }
 
 const styles = StyleSheet.create({
