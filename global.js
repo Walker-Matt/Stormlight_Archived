@@ -38,7 +38,7 @@ Global.CanDisplay = function(progress, appearence) {
   const progressArr = progress.split(',');
   var canDisplay = true;
   for(var i=0; i<3; i++) {
-    if(appearenceArr[i] > progressArr[i]) {
+    if(parseInt(appearenceArr[i]) > parseInt(progressArr[i])) {
       canDisplay = false;
     }
   }

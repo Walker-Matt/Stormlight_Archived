@@ -32,48 +32,23 @@ export default function HomeScreen({ navigation, route }) {
             <Separator/>
             <Icon
               navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
+              screen='Map'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Roshar Map'
             />
             <Separator/>
             <Icon
               navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
+              screen='Locations'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Locations'
             />
             <Separator/>
             <Icon
               navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
-            />
-            <Separator/>
-          </View>
-          <Separator/>
-          <View style={styles.row}>
-            <Separator/>
-            <Icon
-              navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
-            />
-            <Separator/>
-            <Icon
-              navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
-            />
-            <Separator/>
-            <Icon
-              navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
+              screen='Races'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Races'
             />
             <Separator/>
           </View>
@@ -82,23 +57,23 @@ export default function HomeScreen({ navigation, route }) {
             <Separator/>
             <Icon
               navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
+              screen='Religion'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Religion'
             />
             <Separator/>
             <Icon
               navigation={navigation}
               screen='Characters'
-              iconName='placeholder'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
               text='Characters'
             />
             <Separator/>
             <Icon
               navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
+              screen='Creatures'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Creatures'
             />
             <Separator/>
           </View>
@@ -107,23 +82,48 @@ export default function HomeScreen({ navigation, route }) {
             <Separator/>
             <Icon
               navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
+              screen='Spren'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Spren'
             />
             <Separator/>
             <Icon
               navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
+              screen='Plants'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Plants'
             />
             <Separator/>
             <Icon
               navigation={navigation}
-              screen='Characters'
-              iconName='placeholder'
-              text='Characters'
+              screen='Items'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Items'
+            />
+            <Separator/>
+          </View>
+          <Separator/>
+          <View style={styles.row}>
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Shards'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Shards'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Soulcasting'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Soulcasting'
+            />
+            <Separator/>
+            <Icon
+              navigation={navigation}
+              screen='Surgebinding'
+              iconSource={require('./../assets/icons/Character_Icon.png')}
+              text='Surgebinding'
             />
             <Separator/>
           </View>
@@ -147,7 +147,7 @@ const Icon = (props) => (
     >
       <Image
         style={styles.icon}
-        source={require('./../assets/icons/Character_Icon.png')}
+        source={props.iconSource}
       />
     </TouchableOpacity>
     <Text style={styles.iconText}>
@@ -171,7 +171,7 @@ function ProgressView(props) {
         style={styles.progressButton}
         onPress={() => props.navigation.navigate('Progress')}
       >
-        <Text> Update </Text>
+        <Text style={{color: "white"}}> Update </Text>
       </TouchableOpacity>
       <Separator/>
     </View>
@@ -261,13 +261,14 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   progressText: {
-    flex: 9,
+    flex: 11,
     color: "white",
     fontSize: 20
   },
   progressButton: {
-    flex: 2,
-    backgroundColor: "white",
+    flex: 3,
+    height: 40,
+    backgroundColor: "#BD3705",
     justifyContent: "center",
     alignItems: "center"
   },

@@ -12,6 +12,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import {Picker} from '@react-native-picker/picker';
@@ -24,14 +25,15 @@ export default function ProgressScreen({ navigation }) {
   const [chapterValue, setChapterValue] = React.useState('');
 
   return (
-    <View style={styles.column}>
+    <KeyboardAvoidingView
+    style={styles.column}
+    behavior="height">
       <Separator/>
       <View style={styles.textRow}>
         <Text style={styles.text}>
           Book:
         </Text>
       </View>
-      <Separator/>
       <BookSelect
         bookValue={bookValue}
         setBookValue={setBookValue}/>
@@ -65,7 +67,7 @@ export default function ProgressScreen({ navigation }) {
           <Text style={styles.saveText}> Save </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
