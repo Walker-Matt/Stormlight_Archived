@@ -182,7 +182,7 @@ function ShowModal(props) {
   const navigation = props.navigation;
   const progress = GLOBAL.functions.GetProgress();
   const [modalVisible, setModalVisible] = React.useState(true);
-  if(progress == null) {
+  if(progress[0] == ' ') {
     return (
       <Modal
         animationType="slide"
@@ -204,7 +204,7 @@ function ShowModal(props) {
             <Button
               title="I've read nothing"
               onPress={() => {
-                GLOBAL.functions.SetProgress(',,')
+                GLOBAL.functions.SetProgress('0,0,0')
                 setModalVisible(!modalVisible);
               }}
             />

@@ -30,7 +30,11 @@ Global.GetProgress = function() {
     }
   }
   fetch();
-  return progress;
+  if(progress == null) {
+    return ' , , '
+  } else {
+    return progress;
+  }
 }
 
 Global.CanDisplay = function(progress, appearence) {
